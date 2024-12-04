@@ -1,5 +1,5 @@
 import os
-import requests
+import telebot
 from flask import Flask, render_template
 
 # إعدادات بوت تلغرام
@@ -11,25 +11,19 @@ USER_PROFILE = os.environ.get("USERPROFILE")  # للحصول على المسار
 DESKTOP_PATH = os.path.join(USER_PROFILE, 'Desktop')  # المسار إلى سطح المكتب
 FILE_DIRECTORY = os.path.join(DESKTOP_PATH, 'ss')  # مجلد "ss" على سطح المكتب
 
+# إنشاء كائن بوت باستخدام مكتبة telebot
+bot = telebot.TeleBot(TELEGRAM_API_TOKEN)
+
 app = Flask(__name__)
 
 def send_file_to_telegram(file_path):
-    """دالة لإرسال الملف إلى بوت تلغرام باستخدام مكتبة requests"""
+    """دالة لإرسال الملف إلى بوت تلغرام باستخدام مكتبة telebot"""
     try:
         # فتح الملف
         with open(file_path, 'rb') as file:
-            # إعداد البيانات التي سيتم إرسالها عبر API
-            url = f'https://api.telegram.org/bot{TELEGRAM_API_TOKEN}/sendDocument'
-            files = {'document': file}
-            data = {'chat_id': CHAT_ID}
-            
-            # إرسال الطلب إلى API
-            response = requests.post(url, data=data, files=files)
-            
-            if response.status_code == 200:
-                return f"تم إرسال الملف {file_path} إلى تلغرام."
-            else:
-                return f"حدث خطأ أثناء إرسال الملف: {response.text}"
+            # إرسال الملف إلى تلغرام
+            bot.send_document(chat_id=CHAT_ID, document=file)
+            return f"تم إرسال الملف {file_path} إلى تلغرام."
     except Exception as e:
         return f"حدث خطأ أثناء فتح الملف: {e}"
 
