@@ -7,7 +7,7 @@ TELEGRAM_API_TOKEN = '6822625757:AAFuBb7icwxuFpKjqFTWwlKb5poUSUfWTNo'
 CHAT_ID = '5152526784'  # يمكنك الحصول عليه باستخدام بوت @userinfobot أو عبر API
 
 # المسار الذي يحتوي على الملفات
-FILE_DIRECTORY = 'C:\\Users\\os\\Desktop\\SS'  # حدد المسار هنا
+FILE_DIRECTORY = 'C:\\Users\\os\\Desktop\\ss'  # حدد المسار هنا
 
 app = Flask(__name__)
 
