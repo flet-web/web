@@ -3,42 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إرسال الملفات إلى تلغرام</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            direction: rtl;
-            text-align: right;
-            padding: 20px;
-            background-color: #f4f4f9;
-        }
-        h1 {
-            color: #333;
-        }
-        .messages {
-            margin-top: 20px;
-        }
-        .message {
-            background-color: #f9f9f9;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-    </style>
+    <title>رفع الملفات إلى بوت تلغرام</title>
 </head>
 <body>
+    <h1>رفع ملف لإرساله إلى بوت تلغرام</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="file">اختر ملفًا لرفعه:</label>
+        <input type="file" name="file" id="file" required>
+        <button type="submit">رفع الملف</button>
+    </form>
 
-    <h1>  إلى </h1>
-    <p>  OK SEND FILE </p>
-
-    <div class="messages">
-        {% if messages %}
-            {% for message in messages %}
-                <div class="message">{{ message }}</div>
-            {% endfor %}
-        {% endif %}
-    </div>
-
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
 </body>
 </html>
