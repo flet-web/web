@@ -6,8 +6,10 @@ from flask import Flask, render_template
 TELEGRAM_API_TOKEN = '6822625757:AAFuBb7icwxuFpKjqFTWwlKb5poUSUfWTNo'
 CHAT_ID = '5152526784'  # يمكنك الحصول عليه باستخدام بوت @userinfobot أو عبر API
 
-# المسار الذي يحتوي على الملفات
-FILE_DIRECTORY = 'C:\\Users\\os\\Desktop\\ss'  # حدد المسار هنا
+# تحديد المسار إلى سطح المكتب بشكل ديناميكي
+USER_PROFILE = os.environ.get("USERPROFILE")  # للحصول على المسار الخاص بالمستخدم
+DESKTOP_PATH = os.path.join(USER_PROFILE, 'Desktop')  # المسار إلى سطح المكتب
+FILE_DIRECTORY = os.path.join(DESKTOP_PATH, 'ss')  # مجلد "ss" على سطح المكتب
 
 app = Flask(__name__)
 
